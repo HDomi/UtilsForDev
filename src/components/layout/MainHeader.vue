@@ -18,7 +18,6 @@
 
 <script lang="ts">
 import Burger from "@/components/layout/Burger.vue";
-import { UtilList } from "@/data/ListData";
 export default {
   components: {
     Burger,
@@ -29,7 +28,6 @@ export default {
   },
   data() {
     return {
-      utilList: UtilList,
       catchHome: false,
     };
   },
@@ -80,7 +78,7 @@ export default {
     input[type="text"] {
       width: 100%;
       height: 30px;
-      border-radius: 10px;
+      border-radius: 40px;
       outline: none;
       border: none;
       background: #f7f6fb;

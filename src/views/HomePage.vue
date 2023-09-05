@@ -1,13 +1,13 @@
 <template>
   <div class="page-wrap overHidden">
-    <div class="util-list-wrap">
+    <div v-if="utilList" class="util-list-wrap">
       <router-link
         v-for="(item, idx) in utilList"
         :key="`item-${idx}`"
         :to="item.route"
         class="util-item"
       >
-        <img src="../assets/util-icons/dumpTester.svg" />
+        <img :src="getIcon(item.route)" />
         <div>
           <div class="item-name">
             {{ item.name }}
@@ -22,8 +22,6 @@
 </template>
 
 <script lang="ts">
-import { UtilList } from "@/data/ListData";
-
 //Icons
 import IconDumpTester from "../assets/util-icons/dumpTester.svg";
 export default {
@@ -32,7 +30,13 @@ export default {
   props: {},
   data() {
     return {
-      utilList: UtilList,
+      utilList: [
+        {
+          name: "Dump Tester",
+          desc: "시험문제 덤프를 풀어보세요",
+          route: "/dumpTester",
+        },
+      ],
     };
   },
   computed: {},
