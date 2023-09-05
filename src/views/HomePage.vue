@@ -7,7 +7,7 @@
         :to="item.route"
         class="util-item"
       >
-        <img :src="getIcon(item.route)" />
+        <img src="../assets/util-icons/dumpTester.svg" />
         <div>
           <div class="item-name">
             {{ item.name }}
@@ -23,7 +23,7 @@
 
 <script lang="ts">
 //Icons
-import IconDumpTester from "../assets/util-icons/dumpTester.svg";
+// import IconDumpTester from "../assets/util-icons/dumpTester.svg";
 export default {
   components: {},
   mixins: [],
@@ -44,14 +44,14 @@ export default {
   watch: {},
   mounted() {},
   methods: {
-    getIcon(route: string) {
-      switch (route) {
-        case "/dumpTester":
-          return IconDumpTester;
-        default:
-          return "";
-      }
-    },
+    // getIcon(route: string) {
+    //   switch (route) {
+    //     case "/dumpTester":
+    //       return IconDumpTester;
+    //     default:
+    //       return "";
+    //   }
+    // },
   },
 };
 </script>
