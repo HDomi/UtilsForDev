@@ -1,8 +1,8 @@
 <template>
   <div class="page-wrap overHidden">
-    <div v-if="utilList" class="util-list-wrap">
+    <div v-if="searchUtilList.length" class="util-list-wrap">
       <router-link
-        v-for="(item, idx) in utilList"
+        v-for="(item, idx) in searchUtilList"
         :key="`item-${idx}`"
         :to="item.route"
         class="util-item"
@@ -18,31 +18,44 @@
         </div>
       </router-link>
     </div>
+    <div v-else class="util-list-wrap">
+      <div class="no-list">일치하는 항목이 없습니다.</div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
+import _ from "lodash";
 //Icons
 import IconDumpTester from "../assets/util-icons/dumpTester.svg";
 export default {
   components: {},
   mixins: [],
-  props: {},
+  props: {
+    utilSearchText: String,
+  },
   data() {
     return {
       utilList: [
         {
           name: "Dump Tester",
-          desc: "시험문제 덤프를 풀어보세요.",
-          route: "/UtilsForDev/utils/dumpTester",
+          desc: "시험문제 덤프를 만들고 풀어보세요.",
+          route: "/utils/dumpTester",
         },
-      ],
+      ] as { name: string; desc: string; route: string }[],
+      searchUtilList: [] as { name: string; desc: string; route: string }[],
     };
   },
   computed: {},
   presets: {},
-  watch: {},
-  mounted() {},
+  watch: {
+    utilSearchText() {
+      this.getFilteredUtilList(this.utilSearchText);
+    },
+  },
+  mounted() {
+    this.searchUtilList = this.utilList;
+  },
   methods: {
     getIcon(name: string) {
       switch (name) {
@@ -52,15 +65,30 @@ export default {
           return "";
       }
     },
+    getFilteredUtilList(searchValue: any) {
+      this.searchUtilList = this.utilList.filter((util: any) =>
+        util.name.toLowerCase().includes(searchValue.toLowerCase())
+      );
+    },
   },
 };
 </script>
 <style scoped lang="scss">
 .util-list-wrap {
   width: 100%;
+  gap: 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  .no-list {
+    font-size: 16px;
+    font-weight: bold;
+  }
   .util-item {
     background: #fff;
-    width: 170px;
+    padding: 10px;
+    width: 100%;
+    min-width: 170px;
+    max-width: 170px;
     height: 170px;
     border-radius: 15px;
     display: flex;

@@ -5,3 +5,4 @@ declare module "*.svg" {
   const component: ReturnType<typeof defineComponent>;
   export default component;
 }
+declare module "lodash";

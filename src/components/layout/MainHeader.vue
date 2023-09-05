@@ -1,6 +1,6 @@
 <template>
   <div class="header-wrap">
-    <router-link to="/UtilsForDev/home">
+    <router-link to="/utils">
       <div class="header-title">
         <img src="../../assets/domi_logo_color.svg" />Utils for Developer
       </div>
@@ -35,7 +35,7 @@ export default {
   mounted() {},
   methods: {
     onChangeSearch(event: any) {
-      console.log(event.target.value);
+      this.$emit("searchUtil", event.target.value);
     },
   },
 };

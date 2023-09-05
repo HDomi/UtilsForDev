@@ -1,22 +1,13 @@
 <template>
-  <div class="sidebar-wrap scrollBar" :class="{ active: panelState }">
+  <div class="sidebar-wrap" :class="{ active: panelState }">
+    <img src="../../assets/domi_logo_color.svg" />
     <div class="side-item-wrap">
-      <router-link to="/UtilsForDev/home">
+      <router-link to="/utils">
         <div class="item-title">홈으로</div>
       </router-link>
-      <router-link to="/UtilsForDev/about">
+      <router-link to="/about">
         <div class="item-title">About</div>
       </router-link>
-      <!-- <div
-          v-for="(items, i) in labItems"
-          :key="`labCard${i}`"
-          class="lab-card-container"
-          @click="$router.push(`/${items.value}`)"
-        >
-          <div class="card-box">
-            {{ items.label }}
-          </div>
-        </div> -->
     </div>
   </div>
 </template>
@@ -29,14 +20,7 @@ export default {
     panelState: Boolean,
   },
   data() {
-    return {
-      labItems: [
-        {
-          label: "시험 문제 풀기",
-          value: "DumpTester",
-        },
-      ],
-    };
+    return {};
   },
   computed: {},
   presets: {},
@@ -62,17 +46,42 @@ export default {
   width: 350px;
   height: 100%;
   background: #0977ea;
-  padding: 15px 5px 15px 5px;
   transition: 0.3s;
   display: flex;
   flex-direction: column;
   z-index: 999;
-  overflow-y: scroll;
+  overflow-y: hidden;
+  align-items: center;
+  img {
+    width: 150px;
+    margin: 40px 0 50px 0;
+  }
   .side-item-wrap {
-    .item-title {
-      font-size: 18px;
-      font-weight: bold;
-      color: #fff;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    a {
+      width: 100%;
+      box-sizing: border-box;
+      display: block;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 0 20px;
+      &:hover {
+        background: #0765c5;
+      }
+      .item-title {
+        width: 100%;
+        font-size: 18px;
+        font-weight: bold;
+        color: #fff;
+        height: 50px;
+        line-height: 50px;
+        text-align: left;
+        padding: 0 10px;
+      }
     }
   }
 }

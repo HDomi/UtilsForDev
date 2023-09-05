@@ -2,8 +2,8 @@
   <div class="App-wrap" ref="main">
     <SideBar />
     <div class="sec-wrap scrollBar">
-      <MainHeader />
-      <router-view />
+      <MainHeader @searchUtil="searchUtil" />
+      <router-view :utilSearchText="utilSearchText" />
     </div>
     <Footer />
   </div>
@@ -21,13 +21,19 @@ export default {
   mixins: [],
   props: {},
   data() {
-    return {};
+    return {
+      utilSearchText: "",
+    };
   },
   computed: {},
   presets: {},
   watch: {},
   mounted() {},
-  methods: {},
+  methods: {
+    searchUtil(text: string) {
+      this.utilSearchText = text;
+    },
+  },
 };
 </script>
 <style lang="scss" scoped></style>
@@ -155,30 +161,9 @@ li {
 @media (max-width: 1300px) {
 }
 @media (max-width: 1200px) {
-  .page-wrap-inner {
-    width: calc(100% - 330px);
-  }
-  .outLiner {
-    display: none;
-  }
 }
 @media (max-width: 900px) {
-  .page-wrap-inner {
-    width: 100%;
-  }
-  .page-wrap {
-    padding: 10px;
-  }
-  .posting-title {
-    font-size: 14px;
-  }
 }
 @media (max-width: 470px) {
-  .sidebar-wrap {
-    display: none;
-  }
-  .posting-title {
-    font-size: 11px;
-  }
 }
 </style>
