@@ -7,7 +7,7 @@
         :to="item.route"
         class="util-item"
       >
-        <img :src="getIcon(item.route)" />
+        <img src="../assets/util-icons/dumpTester.svg" />
         <div>
           <div class="item-name">
             {{ item.name }}
