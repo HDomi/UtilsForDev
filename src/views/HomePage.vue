@@ -17,11 +17,6 @@
           </div>
         </div>
       </router-link>
-      <!-- <div
-        v-for="(item, idx) in utilList"
-        :key="`item-${idx}`"
-        class="util-item"
-      ></div> -->
     </div>
   </div>
 </template>

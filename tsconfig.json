@@ -24,6 +24,7 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
+    "src/shims-svg.d.ts",
     "vite.config.ts"
   ]
 }
