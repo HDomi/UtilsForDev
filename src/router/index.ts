@@ -3,13 +3,13 @@ import HomePage from "../views/HomePage.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: "/",
+    path: "/UtilsForDev/home",
     name: "home",
     component: HomePage,
   },
   {
-    path: "/dumpTester",
-    name: "postlist",
+    path: "/UtilsForDev/utils/dumpTester",
+    name: "dumpTester",
     component: () => import("../views/util-pages/DumpTester.vue"),
   },
 ];

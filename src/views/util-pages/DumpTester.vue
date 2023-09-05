@@ -500,7 +500,7 @@ export default {
   line-height: 25px;
   background-color: rgba(255, 255, 255, 0.9);
   color: #000;
-  border: 1px solid #fff;
+  border: 1px solid #333;
   border-radius: 20px;
   transition: background-color 0.3s ease-out 0s;
 }
@@ -529,15 +529,15 @@ input[type="text"] {
   margin-right: 10px;
   line-height: 30px;
   height: 30px;
-  border: 1px solid #fff;
+  border: 1px solid #333;
   padding: 8px 12px;
   min-height: 25px;
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 20px;
-  color: #fff;
+  color: #333;
 }
 input[type="text"]::placeholder {
-  color: #fff;
+  color: #333;
 }
 input[type="text"]:focus {
   outline: none;
@@ -552,7 +552,7 @@ button {
   background-color: rgba(255, 255, 255, 0.9);
   color: #000;
   font-weight: 700;
-  border: 1px solid #fff;
+  border: 1px solid #333;
   border-radius: 20px;
   transition: background-color 0.3s ease-out 0s;
 }
@@ -569,15 +569,15 @@ button:hover {
 button:disabled,
 button[disabled] {
   pointer-events: none;
-  border: 1px solid #fff;
-  color: #fff;
+  border: 1px solid #333;
+  color: #333;
   background-color: rgba(255, 255, 255, 0);
 }
 .dump-item {
   min-width: max-content;
   padding: 5px 10px;
   height: 100%;
-  background: #fff;
+  background: #333;
   border-radius: 10px;
   color: #000;
   font-weight: 500;

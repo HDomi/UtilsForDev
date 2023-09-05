@@ -1,6 +1,6 @@
 <template>
   <div class="header-wrap">
-    <router-link to="/">
+    <router-link to="/UtilsForDev/home">
       <div class="header-title">
         <img src="../../assets/domi_logo_color.svg" />Utils for Developer
       </div>
@@ -27,17 +27,11 @@ export default {
     dummydata: Boolean,
   },
   data() {
-    return {
-      catchHome: false,
-    };
+    return {};
   },
   computed: {},
   presets: {},
-  watch: {
-    $route(to, from) {
-      to.name === "home" ? (this.catchHome = true) : (this.catchHome = false);
-    },
-  },
+  watch: {},
   mounted() {},
   methods: {
     onChangeSearch(event: any) {

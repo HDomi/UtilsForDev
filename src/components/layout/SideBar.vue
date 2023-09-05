@@ -1,10 +1,10 @@
 <template>
   <div class="sidebar-wrap scrollBar" :class="{ active: panelState }">
     <div class="side-item-wrap">
-      <router-link to="/">
+      <router-link to="/UtilsForDev/home">
         <div class="item-title">홈으로</div>
       </router-link>
-      <router-link to="/about">
+      <router-link to="/UtilsForDev/about">
         <div class="item-title">About</div>
       </router-link>
       <!-- <div

@@ -7,7 +7,7 @@
         :to="item.route"
         class="util-item"
       >
-        <img src="../assets/util-icons/dumpTester.svg" />
+        <img :src="getIcon(item.name)" />
         <div>
           <div class="item-name">
             {{ item.name }}
@@ -23,7 +23,7 @@
 
 <script lang="ts">
 //Icons
-// import IconDumpTester from "../assets/util-icons/dumpTester.svg";
+import IconDumpTester from "../assets/util-icons/dumpTester.svg";
 export default {
   components: {},
   mixins: [],
@@ -33,8 +33,8 @@ export default {
       utilList: [
         {
           name: "Dump Tester",
-          desc: "시험문제 덤프를 풀어보세요",
-          route: "/dumpTester",
+          desc: "시험문제 덤프를 풀어보세요.",
+          route: "/UtilsForDev/utils/dumpTester",
         },
       ],
     };
@@ -44,14 +44,14 @@ export default {
   watch: {},
   mounted() {},
   methods: {
-    // getIcon(route: string) {
-    //   switch (route) {
-    //     case "/dumpTester":
-    //       return IconDumpTester;
-    //     default:
-    //       return "";
-    //   }
-    // },
+    getIcon(name: string) {
+      switch (name) {
+        case "Dump Tester":
+          return IconDumpTester;
+        default:
+          return "";
+      }
+    },
   },
 };
 </script>

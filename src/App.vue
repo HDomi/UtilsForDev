@@ -1,8 +1,8 @@
 <template>
   <div class="App-wrap" ref="main">
-    <SideBar :panelState="panelState" />
-    <div class="sec-wrap scrollBar" :class="{ hiddenScroll: hiddenScroll }">
-      <MainHeader @changePanelState="changePanelState" />
+    <SideBar />
+    <div class="sec-wrap scrollBar">
+      <MainHeader />
       <router-view />
     </div>
     <Footer />
@@ -21,27 +21,13 @@ export default {
   mixins: [],
   props: {},
   data() {
-    return {
-      panelState: false,
-      hiddenScroll: false,
-    };
+    return {};
   },
   computed: {},
   presets: {},
-  watch: {
-    $route(to, from) {
-      console.log(to.name === "home");
-      to.name === "home"
-        ? (this.hiddenScroll = true)
-        : (this.hiddenScroll = false);
-    },
-  },
+  watch: {},
   mounted() {},
-  methods: {
-    changePanelState(state: any) {
-      this.panelState = state;
-    },
-  },
+  methods: {},
 };
 </script>
 <style lang="scss" scoped></style>
