@@ -6,6 +6,7 @@
         :key="`item-${idx}`"
         :to="item.route"
         class="util-item"
+        @click="onClickUtil(item.name)"
       >
         <img :src="getIcon(item.name)" />
         <div>
@@ -26,6 +27,7 @@
 
 <script lang="ts">
 import _ from "lodash";
+import MakeToast from "@/utils/makeToast";
 //Icons
 import IconDumpTester from "../assets/util-icons/dumpTester.svg";
 export default {
@@ -66,9 +68,20 @@ export default {
       }
     },
     getFilteredUtilList(searchValue: any) {
+      if (
+        searchValue === "" ||
+        searchValue === null ||
+        searchValue === undefined
+      ) {
+        this.searchUtilList = this.utilList;
+        return;
+      }
       this.searchUtilList = this.utilList.filter((util: any) =>
         util.name.toLowerCase().includes(searchValue.toLowerCase())
       );
+    },
+    onClickUtil(name: any) {
+      MakeToast(`${name}으로 이동했습니다.`, "success", 2000);
     },
   },
 };
