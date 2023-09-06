@@ -72,6 +72,14 @@ a {
 li {
   list-style: none;
 }
+input[type="text"] {
+  outline: none;
+  border: none;
+}
+textarea {
+  outline: none;
+  border: none;
+}
 .hiddenScroll {
   overflow: hidden !important;
 }
@@ -123,16 +131,16 @@ li {
   align-items: center;
   justify-content: space-between;
 }
-.scrollBar::-webkit-scrollbar {
-  width: 8px; /* 스크롤바의 너비 */
+.blueScrollBar::-webkit-scrollbar {
+  width: 8px;
 }
-.scrollBar::-webkit-scrollbar-thumb {
-  height: 30%; /* 스크롤바의 길이 */
-  background: #5d5d5d; /* 스크롤바의 색상 */
+.blueScrollBar::-webkit-scrollbar-thumb {
+  height: 30%;
+  background: rgb(107, 176, 255);
   border-radius: 10px;
 }
-.scrollBar::-webkit-scrollbar-track {
-  background: rgba(91, 91, 91, 0.1); /*스크롤바 뒷 배경 색상*/
+.blueScrollBar::-webkit-scrollbar-track {
+  background: rgb(234, 249, 255);
 }
 .page-wrap-inner {
   padding: 0 15px 0 15px;

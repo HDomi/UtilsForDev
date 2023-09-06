@@ -30,6 +30,7 @@ import _ from "lodash";
 import MakeToast from "@/utils/makeToast";
 //Icons
 import IconDumpTester from "../assets/util-icons/dumpTester.svg";
+import IconJsonParser from "../assets/util-icons/jsonParser.svg";
 export default {
   components: {},
   mixins: [],
@@ -43,6 +44,11 @@ export default {
           name: "Dump Tester",
           desc: "시험문제 덤프를 만들고 풀어보세요.",
           route: "/utils/dumpTester",
+        },
+        {
+          name: "JSON Parser",
+          desc: "String형식의 JSON을 파싱하세요.",
+          route: "/utils/jsonParser",
         },
       ] as { name: string; desc: string; route: string }[],
       searchUtilList: [] as { name: string; desc: string; route: string }[],
@@ -63,6 +69,8 @@ export default {
       switch (name) {
         case "Dump Tester":
           return IconDumpTester;
+        case "JSON Parser":
+          return IconJsonParser;
         default:
           return "";
       }
@@ -91,7 +99,7 @@ export default {
   width: 100%;
   gap: 15px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
   .no-list {
     font-size: 16px;
     font-weight: bold;

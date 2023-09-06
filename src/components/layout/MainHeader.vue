@@ -2,7 +2,7 @@
   <div class="header-wrap">
     <router-link to="/utils">
       <div class="header-title">
-        <img src="../../assets/domi_logo_color.svg" />Utils for Developer
+        <img src="../../assets/domi_logo_color.svg" />{{ headerTitle }}
       </div>
     </router-link>
     <div class="search-bar">
@@ -27,11 +27,24 @@ export default {
     dummydata: Boolean,
   },
   data() {
-    return {};
+    return {
+      headerTitle: "Utils for Developer",
+    };
   },
   computed: {},
   presets: {},
-  watch: {},
+  watch: {
+    $route(to, from) {
+      if (to.name === "home") {
+        this.headerTitle = "Utils for Developer";
+        return;
+      }
+      if (to.path !== from.path) {
+        this.headerTitle = to.name;
+        return;
+      }
+    },
+  },
   mounted() {},
   methods: {
     onChangeSearch(event: any) {

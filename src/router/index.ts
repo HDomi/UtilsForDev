@@ -4,6 +4,7 @@ import AboutPage from "../views/AboutPage.vue";
 
 //Utils
 import DumpTester from "../views/util-pages/DumpTester.vue";
+import JsonParser from "../views/util-pages/JsonParser.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -18,13 +19,18 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/about",
-    name: "about",
+    name: "About",
     component: AboutPage,
   },
   {
     path: "/utils/dumpTester",
-    name: "dumpTester",
+    name: "Dump Tester",
     component: DumpTester,
+  },
+  {
+    path: "/utils/jsonParser",
+    name: "Json Parser",
+    component: JsonParser,
   },
 ];
 

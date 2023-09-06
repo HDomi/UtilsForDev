@@ -1,10 +1,12 @@
 <template>
   <div class="sidebar-wrap" :class="{ active: panelState }">
-    <img src="../../assets/domi_logo_color.svg" />
+    <router-link to="/utils">
+      <img src="../../assets/domi_logo_color.svg" />
+    </router-link>
     <div class="side-item-wrap">
-      <router-link to="/utils">
+      <!-- <router-link to="/utils">
         <div class="item-title">홈으로</div>
-      </router-link>
+      </router-link> -->
       <router-link to="/about">
         <div class="item-title">About</div>
       </router-link>
