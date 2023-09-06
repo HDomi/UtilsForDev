@@ -577,9 +577,10 @@ button[disabled] {
   min-width: max-content;
   padding: 5px 10px;
   height: 100%;
-  background: #333;
+  background: #fff;
   border-radius: 10px;
   color: #000;
+  border: 1px solid #000;
   font-weight: 500;
   margin-right: 10px;
   display: flex;
