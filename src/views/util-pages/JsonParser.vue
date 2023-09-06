@@ -59,10 +59,8 @@ export default {
     },
     returnValue(v: any, type: any) {
       let color = "";
-      console.log(type);
       switch (type) {
         case "boolean":
-          console.log(v);
           if (v) {
             color = "blue";
           } else {
