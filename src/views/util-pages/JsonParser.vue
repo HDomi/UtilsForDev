@@ -48,7 +48,7 @@ export default {
         margin-left: 10px;
         cursor: pointer;
         `;
-      // return `<span class="key-${key}" style="${style}" @click="console.log('ads')">${text}</span><br>`;
+      // return `<span class="${key}" style="${style}" @click="console.log('ads')">${text}</span><br>`;
       return `<span></span>`;
     },
     onClickOpener() {
@@ -57,8 +57,26 @@ export default {
     returnSection(v: any) {
       return `<span style="color: #333">${v}</span>`;
     },
-    returnValue(v: any) {
-      return `<span class="parse-value" style="color: rgb(9, 119, 234)">${v}</span>`;
+    returnValue(v: any, type: any) {
+      let color = "";
+      console.log(type);
+      switch (type) {
+        case "boolean":
+          console.log(v);
+          if (v) {
+            color = "blue";
+          } else {
+            color = "red";
+          }
+          break;
+        case "number":
+          color = "blue";
+          break;
+        case "string":
+          color = "green";
+          break;
+      }
+      return `<span class="parse-value" style="color: ${color}">${v}</span>`;
     },
     getParsing() {
       if (this.inputJson) {
@@ -88,11 +106,10 @@ export default {
 
     parseObject(obj: any, depth: any, title: string) {
       if (typeof obj !== "object" || obj === null) {
-        // If the value is not an object or is null, return it as is
         if (typeof obj === "string") {
-          return this.returnValue(`"${obj}"`);
+          return this.returnValue(`"${obj}"`, typeof obj);
         } else if (typeof obj === "boolean" || typeof obj === "number") {
-          return this.returnValue(obj);
+          return this.returnValue(obj, typeof obj);
         } else {
           return JSON.stringify(obj);
         }
@@ -107,7 +124,6 @@ export default {
         const value = obj[key];
 
         if (Array.isArray(value)) {
-          // If the value is an array, add square brackets
           parsed += `${this.returnSection("[")}${this.getPlusAndMinus(
             key,
             "minus"
@@ -122,11 +138,10 @@ export default {
           parsed += this.parseObject(value, depth + 1, key);
           parsed += `${this.returnSection("}")}`;
         } else {
-          // If the value is not an object or is null, return it as is
           if (typeof value === "string") {
-            parsed += this.returnValue(`"${value}"`);
+            parsed += this.returnValue(`"${value}"`, typeof value);
           } else if (typeof value === "boolean" || typeof value === "number") {
-            parsed += this.returnValue(value);
+            parsed += this.returnValue(value, typeof value);
           } else {
             parsed += JSON.stringify(value);
           }
@@ -137,7 +152,7 @@ export default {
         }
       });
       if (depth >= 0) {
-        parsed = `<div class="${title}-sec" style="margin-left: 20px">${parsed}</div>`;
+        parsed = `<div class="div-${title}" style="margin-left: 20px">${parsed}</div>`;
       }
 
       return parsed;
@@ -170,7 +185,7 @@ export default {
   }
   .parsing-wrap {
     border: 1px solid rgb(9, 119, 234);
-    width: 62%;
+    width: calc(64% - 30px);
     background: #fff;
     height: 100%;
     .parsing-header {
