@@ -6,3 +6,4 @@ declare module "*.svg" {
   export default component;
 }
 declare module "lodash";
+declare module "downloadjs";

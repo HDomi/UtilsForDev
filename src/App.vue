@@ -1,7 +1,7 @@
 <template>
   <div class="App-wrap" ref="main">
     <SideBar />
-    <div class="sec-wrap scrollBar">
+    <div class="sec-wrap blueScrollBar">
       <MainHeader @searchUtil="searchUtil" />
       <router-view :utilSearchText="utilSearchText" />
     </div>
@@ -37,7 +37,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped></style>
-<style>
+<style lang="scss">
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css");
 body {
   background: #f7f6fb;
@@ -72,6 +72,10 @@ a {
 li {
   list-style: none;
 }
+p {
+  margin: 0 auto;
+  padding: 0;
+}
 input[type="text"] {
   outline: none;
   border: none;
@@ -82,6 +86,35 @@ textarea {
 }
 .hiddenScroll {
   overflow: hidden !important;
+}
+.flexRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flexColumn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.normal-desc {
+  display: block;
+  font-size: 17px;
+  color: #333;
+  font-weight: normal;
+}
+.blue-btn {
+  border-radius: 14px;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  &:hover {
+    background-color: #0056b3;
+  }
 }
 .tryAngle {
   font-size: 13px;

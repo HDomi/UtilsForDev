@@ -20,6 +20,8 @@
     "@vue/cli-plugin-router": "^5.0.8",
     "@vue/cli-plugin-vuex": "^5.0.8",
     "axios": "^1.2.1",
+    "canvas": "^2.11.2",
+    "downloadjs": "^1.4.7",
     "gh-pages": "^4.0.0",
     "highlight.js": "^11.7.0",
     "lodash": "^4.17.21",

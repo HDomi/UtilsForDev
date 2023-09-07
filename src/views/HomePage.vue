@@ -31,6 +31,7 @@ import MakeToast from "@/utils/makeToast";
 //Icons
 import IconDumpTester from "../assets/util-icons/dumpTester.svg";
 import IconJsonParser from "../assets/util-icons/jsonParser.svg";
+import IconConvertImage from "../assets/util-icons/convertImage.svg";
 export default {
   components: {},
   mixins: [],
@@ -49,6 +50,11 @@ export default {
           name: "JSON Parser",
           desc: "String형식의 JSON을 파싱하세요.",
           route: "/utils/jsonParser",
+        },
+        {
+          name: "Convert Image",
+          desc: "이미지를 다른형식으로 변환하세요.",
+          route: "/utils/convertImage",
         },
       ] as { name: string; desc: string; route: string }[],
       searchUtilList: [] as { name: string; desc: string; route: string }[],
@@ -71,6 +77,8 @@ export default {
           return IconDumpTester;
         case "JSON Parser":
           return IconJsonParser;
+        case "Convert Image":
+          return IconConvertImage;
         default:
           return "";
       }

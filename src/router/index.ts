@@ -5,6 +5,7 @@ import AboutPage from "../views/AboutPage.vue";
 //Utils
 import DumpTester from "../views/util-pages/DumpTester.vue";
 import JsonParser from "../views/util-pages/JsonParser.vue";
+import ConvertImage from "../views/util-pages/ConvertImage.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -31,6 +32,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/utils/jsonParser",
     name: "Json Parser",
     component: JsonParser,
+  },
+  {
+    path: "/utils/convertImage",
+    name: "Convert Image",
+    component: ConvertImage,
   },
 ];
 
