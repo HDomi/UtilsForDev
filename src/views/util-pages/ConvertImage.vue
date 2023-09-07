@@ -137,7 +137,7 @@ export default {
         const type = file.type.split("/")[1];
         this.uploadedImageType = type === "png" ? "png" : "jpg";
         MakeToast(
-          `${inputElement.files[0].name}이(가) 업로드되었습니다. / 타입 : ${this.selectedImageType}`,
+          `${inputElement.files[0].name}이(가) 업로드되었습니다. / 타입 : ${this.uploadedImageType}`,
           "success",
           2000
         );
