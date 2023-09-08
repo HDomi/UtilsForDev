@@ -32,6 +32,7 @@ import MakeToast from "@/utils/makeToast";
 import IconDumpTester from "../assets/util-icons/dumpTester.svg";
 import IconJsonParser from "../assets/util-icons/jsonParser.svg";
 import IconConvertImage from "../assets/util-icons/convertImage.svg";
+import IconColorPicker from "../assets/util-icons/colorPicker.svg";
 export default {
   components: {},
   mixins: [],
@@ -52,9 +53,19 @@ export default {
           route: "/utils/jsonParser",
         },
         {
+          name: "Color Picker",
+          desc: "색상을 선택하고 코드를 알아보세요.",
+          route: "/utils/colorPicker",
+        },
+        {
           name: "Convert Image",
           desc: "이미지를 다른형식으로 변환하세요.",
           route: "/utils/convertImage",
+        },
+        {
+          name: "Combine PDF",
+          desc: "이미지를 다른형식으로 변환하세요.",
+          route: "/utils/combinePdf",
         },
       ] as { name: string; desc: string; route: string }[],
       searchUtilList: [] as { name: string; desc: string; route: string }[],
@@ -79,6 +90,8 @@ export default {
           return IconJsonParser;
         case "Convert Image":
           return IconConvertImage;
+        case "Color Picker":
+          return IconColorPicker;
         default:
           return "";
       }

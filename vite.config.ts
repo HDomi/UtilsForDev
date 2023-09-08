@@ -11,6 +11,16 @@ export default (mode: any) =>
     base: "",
     build: {
       chunkSizeWarningLimit: 3000, // Set the limit to a higher value (in KiB)
+      rollupOptions: {
+        output: {
+          // ...
+          manualChunks(id) {
+            if (id.includes("vue-color")) {
+              return "vue-color";
+            }
+          },
+        },
+      },
     },
     plugins: [
       vue({
