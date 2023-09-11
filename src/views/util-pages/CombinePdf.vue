@@ -100,7 +100,7 @@ export default {
     handleFileChange(event: any) {
       const uploadFiles = Array.from(event.target.files);
       if (uploadFiles) {
-        const nameArray = uploadFiles.map((item) => item.name);
+        const nameArray = uploadFiles.map((item: any) => item.name);
         MakeToast(
           `${nameArray.join(", ")}이(가) 업로드 되었습니다.`,
           "success",
