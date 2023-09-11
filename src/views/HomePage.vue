@@ -1,23 +1,27 @@
 <template>
   <div class="page-wrap overHidden">
     <div v-if="searchUtilList.length" class="util-list-wrap">
-      <router-link
+      <div
+        class="util-list-item-wrap"
         v-for="(item, idx) in searchUtilList"
         :key="`item-${idx}`"
-        :to="item.route"
-        class="util-item"
-        @click="onClickUtil(item.name)"
       >
-        <img :src="getIcon(item.name)" />
-        <div>
-          <div class="item-name">
-            {{ item.name }}
+        <router-link
+          :to="item.route"
+          class="util-item"
+          @click="onClickUtil(item.name)"
+        >
+          <img :src="getIcon(item.name)" />
+          <div>
+            <div class="item-name">
+              {{ item.name }}
+            </div>
+            <div class="item-desc">
+              {{ item.desc }}
+            </div>
           </div>
-          <div class="item-desc">
-            {{ item.desc }}
-          </div>
-        </div>
-      </router-link>
+        </router-link>
+      </div>
     </div>
     <div v-else class="util-list-wrap">
       <div class="no-list">일치하는 항목이 없습니다.</div>
@@ -33,6 +37,8 @@ import IconDumpTester from "../assets/util-icons/dumpTester.svg";
 import IconJsonParser from "../assets/util-icons/jsonParser.svg";
 import IconConvertImage from "../assets/util-icons/convertImage.svg";
 import IconCombinePdf from "../assets/util-icons/combinePdf.svg";
+import IconOnlineJs from "../assets/util-icons/onlineJS.svg";
+
 // import IconColorPicker from "../assets/util-icons/colorPicker.svg";
 export default {
   components: {},
@@ -68,6 +74,11 @@ export default {
           desc: "여러 PDF파일을 합쳐보세요.",
           route: "/utils/combinePdf",
         },
+        // {
+        //   name: "Online JS",
+        //   desc: "JS를 온라인에서 실행해보세요.",
+        //   route: "/utils/onlineJS",
+        // },
       ] as { name: string; desc: string; route: string }[],
       searchUtilList: [] as { name: string; desc: string; route: string }[],
     };
@@ -91,10 +102,12 @@ export default {
           return IconJsonParser;
         case "Convert Image":
           return IconConvertImage;
-        // case "Color Picker":
-        //   return IconColorPicker;
         case "Combine PDF":
           return IconCombinePdf;
+        case "Online JS":
+          return IconOnlineJs;
+        // case "Color Picker":
+        //   return IconColorPicker;
         default:
           return "";
       }
@@ -128,35 +141,40 @@ export default {
     font-size: 16px;
     font-weight: bold;
   }
-  .util-item {
-    background: #fff;
-    padding: 10px;
+  .util-list-item-wrap {
     width: 100%;
-    min-width: 170px;
-    max-width: 170px;
-    height: 170px;
-    border-radius: 15px;
+    height: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
     align-items: center;
-    box-shadow: 7px 7px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-    transition: box-shadow 0.1s;
-    &:hover {
-      outline: 1px solid rgba(9, 119, 234, 0.5); /* outline 효과 추가 (투명한 가상의 테두리) */
-    }
-    img {
-      width: 70px;
-      height: 70px;
-    }
-    .item-name {
-      font-size: 16px;
-      font-weight: bold;
-    }
-    .item-desc {
-      font-size: 12px;
-      margin-top: 2px;
+    justify-content: center;
+    .util-item {
+      background: #fff;
+      padding: 10px;
+      width: 170px;
+      height: 170px;
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      box-shadow: 7px 7px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(5px);
+      transition: box-shadow 0.1s;
+      &:hover {
+        outline: 1px solid rgba(9, 119, 234, 0.5); /* outline 효과 추가 (투명한 가상의 테두리) */
+      }
+      img {
+        width: 70px;
+        height: 70px;
+      }
+      .item-name {
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .item-desc {
+        font-size: 12px;
+        margin-top: 2px;
+      }
     }
   }
 }

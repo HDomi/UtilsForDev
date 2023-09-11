@@ -4,8 +4,8 @@
     <div class="sec-wrap blueScrollBar">
       <MainHeader @searchUtil="searchUtil" />
       <router-view :utilSearchText="utilSearchText" />
+      <Footer />
     </div>
-    <Footer />
   </div>
 </template>
 <script lang="ts">

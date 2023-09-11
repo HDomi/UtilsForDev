@@ -7,6 +7,7 @@ import DumpTester from "../views/util-pages/DumpTester.vue";
 import JsonParser from "../views/util-pages/JsonParser.vue";
 import ConvertImage from "../views/util-pages/ConvertImage.vue";
 import CombinePdf from "../views/util-pages/CombinePdf.vue";
+import OnlineJS from "../views/util-pages/OnlineJS.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -43,6 +44,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/utils/combinePdf",
     name: "Combine PDF",
     component: CombinePdf,
+  },
+  {
+    path: "/utils/onlineJS",
+    name: "Online JS",
+    component: OnlineJS,
   },
 ];
 
