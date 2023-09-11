@@ -6,7 +6,6 @@ import AboutPage from "../views/AboutPage.vue";
 import DumpTester from "../views/util-pages/DumpTester.vue";
 import JsonParser from "../views/util-pages/JsonParser.vue";
 import ConvertImage from "../views/util-pages/ConvertImage.vue";
-import ColorPicker from "../views/util-pages/ColorPicker.vue";
 import CombinePdf from "../views/util-pages/CombinePdf.vue";
 
 const routes: Array<RouteRecordRaw> = [
@@ -39,11 +38,6 @@ const routes: Array<RouteRecordRaw> = [
     path: "/utils/convertImage",
     name: "Convert Image",
     component: ConvertImage,
-  },
-  {
-    path: "/utils/colorPicker",
-    name: "Color Picker",
-    component: ColorPicker,
   },
   {
     path: "/utils/combinePdf",
