@@ -45,14 +45,14 @@
       @start="dragging = true"
       @end="dragging = false"
     >
-      <template #item="{ element, idx }">
+      <template #item="{ element, index }">
         <div class="uploaded-pdf-item">
-          <p class="normal-desc">{{ idx + 1 }}. {{ element.name }}</p>
+          <p class="normal-desc">{{ index + 1 }}. {{ element.name }}</p>
           <img
             src="../../assets/ic_del.svg"
             alt="del-image"
             class="del-btn"
-            @click="deleteUploadedFile(idx)"
+            @click="deleteUploadedFile(index)"
           />
         </div>
       </template>
@@ -63,7 +63,7 @@
 <script lang="ts">
 import MakeToast from "@/utils/makeToast";
 import { PDFDocument } from "pdf-lib";
-import draggable from "vuedraggable"; // vuedraggable-next 패키지를 가져옵니다.
+import draggable from "vuedraggable";
 
 export default {
   components: {
@@ -119,7 +119,6 @@ export default {
         const pdfBuffer = await pdfFile.arrayBuffer();
         const pdfDoc = await PDFDocument.load(pdfBuffer);
 
-        // 모든 페이지를 복사하여 병합
         const copiedPages = await mergedPdfDoc.copyPages(
           pdfDoc,
           pdfDoc.getPageIndices()
