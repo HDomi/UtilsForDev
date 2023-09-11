@@ -65,7 +65,7 @@ export default {
         },
         {
           name: "Combine PDF",
-          desc: "이미지를 다른형식으로 변환하세요.",
+          desc: "여러 PDF파일을 합쳐보세요.",
           route: "/utils/combinePdf",
         },
       ] as { name: string; desc: string; route: string }[],
