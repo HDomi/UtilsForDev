@@ -15,9 +15,19 @@
           <p v-if="pdfFiles.length">{{ pdfFiles.length }}개 선택됨</p>
         </div>
       </div>
-      <button class="blue-btn" @click="mergeAndDownload">
-        PDF 병합 및 다운로드
-      </button>
+      <div>
+        <button
+          v-if="pdfFiles.length"
+          class="blue-btn"
+          style="margin-right: 15px"
+          @click="deleteAllPdf"
+        >
+          모두삭제
+        </button>
+        <button class="blue-btn" @click="mergeAndDownload">
+          PDF 병합 및 다운로드
+        </button>
+      </div>
     </div>
     <div class="flexRow pdf-desc">
       <p class="normal-desc">
@@ -25,31 +35,46 @@
         순서를 변경해주세요.
       </p>
     </div>
-    <div class="uploaded-pdf-list">
-      <div
-        v-for="(item, idx) in pdfFiles"
-        :key="`item-${idx}`"
-        class="uploaded-pdf-item"
-        @click="deleteUploadedFile(idx)"
-      >
-        <p class="normal-desc">{{ idx + 1 }}. {{ item.name }}</p>
-        <img src="../../assets/ic_del.svg" alt="del-image" class="del-btn" />
-      </div>
-    </div>
+    <draggable
+      :list="pdfFiles"
+      :disabled="!enabled"
+      item-key="name"
+      class="uploaded-pdf-list"
+      ghost-class="ghost"
+      :move="checkMove"
+      @start="dragging = true"
+      @end="dragging = false"
+    >
+      <template #item="{ element, idx }">
+        <div class="uploaded-pdf-item">
+          <p class="normal-desc">{{ idx + 1 }}. {{ element.name }}</p>
+          <img
+            src="../../assets/ic_del.svg"
+            alt="del-image"
+            class="del-btn"
+            @click="deleteUploadedFile(idx)"
+          />
+        </div>
+      </template>
+    </draggable>
   </div>
 </template>
 
 <script lang="ts">
 import MakeToast from "@/utils/makeToast";
 import { PDFDocument } from "pdf-lib";
+import draggable from "vuedraggable"; // vuedraggable-next 패키지를 가져옵니다.
 
 export default {
-  components: {},
-  mixins: [],
-  props: {},
+  components: {
+    draggable,
+  },
   data() {
     return {
       pdfFiles: [] as File[],
+
+      enabled: true,
+      dragging: false,
     };
   },
   computed: {},
@@ -63,20 +88,19 @@ export default {
         fileInput.click();
       }
     },
-    deleteUploadedFile(index: any) {
-      const name = this.pdfFiles.filter(
-        (item: any, idx: any) => index === idx
-      )[0].name;
+    deleteUploadedFile(index: number) {
+      const name = this.pdfFiles[index].name;
       MakeToast(`${name}이(가) 삭제 되었습니다.`, "success", 2000);
-      const filtered = this.pdfFiles.filter(
-        (item: any, idx: any) => index !== idx
-      );
-      this.pdfFiles = filtered;
+      this.pdfFiles.splice(index, 1);
+    },
+    deleteAllPdf() {
+      this.pdfFiles = [];
+      MakeToast(`모든 PDF가 삭제 되었습니다.`, "success", 2000);
     },
     handleFileChange(event: any) {
       const uploadFiles = Array.from(event.target.files);
       if (uploadFiles) {
-        const nameArray = uploadFiles.map((item: any) => item.name);
+        const nameArray = uploadFiles.map((item) => item.name);
         MakeToast(
           `${nameArray.join(", ")}이(가) 업로드 되었습니다.`,
           "success",
@@ -85,16 +109,26 @@ export default {
         this.pdfFiles.push(...(uploadFiles as File[]));
       }
     },
+    checkMove(e: any) {
+      console.log("Future index: " + e.draggedContext.futureIndex);
+    },
     async mergeAndDownload() {
       const mergedPdfDoc = await PDFDocument.create();
 
-      // 업로드한 각 PDF 파일을 하나로 합침
-      for (const pdfFile of this.pdfFiles as any) {
+      for (const pdfFile of this.pdfFiles) {
         const pdfBuffer = await pdfFile.arrayBuffer();
         const pdfDoc = await PDFDocument.load(pdfBuffer);
-        const [copiedPage] = await mergedPdfDoc.copyPages(pdfDoc, [0]);
-        mergedPdfDoc.addPage(copiedPage);
+
+        // 모든 페이지를 복사하여 병합
+        const copiedPages = await mergedPdfDoc.copyPages(
+          pdfDoc,
+          pdfDoc.getPageIndices()
+        );
+        copiedPages.forEach((copiedPage) => {
+          mergedPdfDoc.addPage(copiedPage);
+        });
       }
+
       const mergedPdfBytes = await mergedPdfDoc.save();
 
       const mergedPdfBlob = new Blob([mergedPdfBytes], {
@@ -146,18 +180,21 @@ export default {
 .uploaded-pdf-list {
   border-radius: 14px;
   border: 1px solid rgb(107, 176, 255);
-  padding: 10px 20px;
+  padding: 15px 15px;
   width: 100%;
-  min-height: 300px;
+  height: 100%;
   background: #fff;
   display: flex;
   gap: 10px;
   color: #333;
+  flex-direction: column;
   flex-wrap: wrap;
   align-content: flex-start;
   .uploaded-pdf-item {
+    cursor: pointer;
     white-space: nowrap;
     height: 40px;
+    width: max-content;
     display: flex;
     align-items: center;
     padding: 5px 15px;
