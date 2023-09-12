@@ -12,7 +12,7 @@
       <div class="cutBar"></div>
       <div class="posting-info-wrap">
         <div class="posting-golist" @click="goList">목록으로</div>
-        <div class="posting-date">작성일 : {{ mdDate }}</div>
+        <div class="posting-date">작성자 : {{ mdWriter }}</div>
       </div>
       <div class="posting-wrap">
         <div
@@ -39,7 +39,7 @@ export default {
     return {
       isLoading: false,
       mdTitle: "",
-      mdDate: "",
+      mdWriter: "",
       contents: "",
     };
   },
@@ -64,7 +64,7 @@ export default {
     const mdTitle: any = this.$route.query.mdPath;
     const makeTitleDate = mdTitle.split("-");
     this.mdTitle = makeTitleDate[0];
-    this.mdDate = makeTitleDate[1];
+    this.mdWriter = makeTitleDate[1];
   },
   methods: {
     goList() {
