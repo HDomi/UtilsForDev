@@ -70,7 +70,7 @@ export default {
       color: "",
       total: 0,
       used: 0,
-      percent: "",
+      percent: 0,
       label: "",
       warningColor: "#FA5252",
       graphType: {
@@ -104,7 +104,7 @@ export default {
     this.color = this.gColor ?? "";
     this.total = this.gTotal ?? 0;
     this.used = this.gUsed ?? 0;
-    this.percent = ((this.used / this.total) * 100).toFixed(2) ?? "";
+    this.percent = (this.used / this.total) * 100 ?? "";
     this.label = this.gLabel ?? "";
   },
   methods: {},
