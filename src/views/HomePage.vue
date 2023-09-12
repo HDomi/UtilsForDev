@@ -1,5 +1,10 @@
 <template>
   <div class="page-wrap overHidden">
+    <div v-if="isLoading" class="loading-container">
+      <div class="loading">
+        <FadeLoader />
+      </div>
+    </div>
     <p class="main-tit">Dashboard</p>
     <div class="util-dashboard-wrap shadowBox">
       <div class="graph-wrap">
@@ -17,6 +22,7 @@
           v-for="(item, idx) in postList"
           :key="`item-${idx}`"
           class="post-item"
+          @click="onClickPost(item.path)"
         >
           <div class="post-title">
             {{ item.title }}
@@ -60,8 +66,10 @@
 
 <script lang="ts">
 import _ from "lodash";
+import axios from "axios";
 import MakeToast from "@/utils/makeToast";
 import GraphIndicator from "@/components/GraphIndicator.vue";
+import FadeLoader from "vue-spinner/src/FadeLoader.vue";
 //Icons
 import IconDumpTester from "../assets/util-icons/dumpTester.svg";
 import IconJsonParser from "../assets/util-icons/jsonParser.svg";
@@ -78,6 +86,7 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       utilList: [
         {
           name: "Dump Tester",
@@ -133,33 +142,12 @@ export default {
         },
       ],
 
-      postList: [
-        {
-          title: "제목1",
-          writer: "ADMIN",
-          date: "2023.09.12",
-        },
-        {
-          title: "제목2",
-          writer: "ADMIN",
-          date: "2023.09.12",
-        },
-        {
-          title: "제목3",
-          writer: "ADMIN",
-          date: "2023.09.12",
-        },
-        {
-          title: "제목4",
-          writer: "ADMIN",
-          date: "2023.09.12",
-        },
-        {
-          title: "제목5",
-          writer: "ADMIN",
-          date: "2023.09.12",
-        },
-      ],
+      postList: [] as {
+        title: string;
+        writer: string;
+        date: string;
+        path: string;
+      }[],
     };
   },
   computed: {},
@@ -171,6 +159,7 @@ export default {
   },
   mounted() {
     this.searchUtilList = this.utilList;
+    this.getPosts();
   },
   methods: {
     getIcon(name: string) {
@@ -206,6 +195,39 @@ export default {
     },
     onClickUtil(name: any) {
       // MakeToast(`${name}으로 이동했습니다.`, "success", 2000);
+    },
+    async getPosts() {
+      this.isLoading = true;
+      let posts = await axios
+        .get(`https://api.github.com/repos/hdomi/util-posts/contents/`)
+        .then((res: any) => {
+          let resData = new Array();
+          resData = res.data;
+          const convertList = new Array();
+          resData.forEach((p: any) => {
+            const name = p.name;
+            const splitName = name.split("-");
+            const date = splitName[2].split(".md")[0];
+            const convert = {
+              title: splitName[0],
+              writer: splitName[1],
+              date: date,
+              path: p.name,
+            };
+            convertList.push(convert);
+          });
+          return convertList;
+        });
+      this.postList = posts;
+      this.isLoading = false;
+    },
+    onClickPost(path: string) {
+      this.$router.push({
+        path: `/posting`,
+        query: {
+          mdPath: `${path}`,
+        },
+      });
     },
   },
 };

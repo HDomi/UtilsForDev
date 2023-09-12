@@ -5,7 +5,7 @@
         <img src="../../assets/domi_logo_color.svg" />{{ headerTitle }}
       </div>
     </router-link>
-    <div class="search-bar">
+    <div class="search-bar" v-if="isHome">
       <input
         type="text"
         @input="onChangeSearch"
@@ -29,6 +29,7 @@ export default {
   data() {
     return {
       headerTitle: "Utils for Developer",
+      isHome: true,
     };
   },
   computed: {},
@@ -37,10 +38,17 @@ export default {
     $route(to, from) {
       if (to.name === "home") {
         this.headerTitle = "Utils for Developer";
+        this.isHome = true;
         return;
       }
+
       if (to.path !== from.path) {
         this.headerTitle = to.name;
+        if (to.name === "home") {
+          this.isHome = true;
+        } else {
+          this.isHome = false;
+        }
         return;
       }
     },

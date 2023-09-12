@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import HomePage from "../views/HomePage.vue";
 import AboutPage from "../views/AboutPage.vue";
-
+import PostPage from "../views/PostPage.vue";
 //Utils
 import DumpTester from "../views/util-pages/DumpTester.vue";
 import JsonParser from "../views/util-pages/JsonParser.vue";
@@ -24,6 +24,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/about",
     name: "About",
     component: AboutPage,
+  },
+  {
+    path: "/posting",
+    name: "Posting",
+    component: PostPage,
   },
   {
     path: "/utils/dumpTester",
