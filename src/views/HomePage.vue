@@ -6,16 +6,16 @@
       </div>
     </div>
     <p class="main-tit">Dashboard</p>
+    <div class="blue-wrap shadowBox">
+      <p class="dashboard-blue-title">
+        여러분을 위한 많은 "Utility"가<br />준비되어 있습니다.
+      </p>
+      <img src="../assets/dashboard-img.svg" />
+    </div>
     <div class="util-dashboard-wrap shadowBox">
-      <div class="graph-wrap">
-        <GraphIndicator
-          v-for="(item, idx) in graphIndicators"
-          :key="`item-${idx}`"
-          :gColor="item.color"
-          :gTotal="item.total"
-          :gUsed="item.used"
-          :gLabel="item.label"
-        ></GraphIndicator>
+      <div class="post-list-header flexRow">
+        <p class="sub-tit">공지사항</p>
+        <div class="list-length">{{ postList.length }}개</div>
       </div>
       <div class="post-list blueScrollBar">
         <div
@@ -70,6 +70,7 @@ import axios from "axios";
 import MakeToast from "@/utils/makeToast";
 import GraphIndicator from "@/components/GraphIndicator.vue";
 import FadeLoader from "vue-spinner/src/FadeLoader.vue";
+import UtilList from "@/utils/UtilList";
 //Icons
 import IconDumpTester from "../assets/util-icons/dumpTester.svg";
 import IconJsonParser from "../assets/util-icons/jsonParser.svg";
@@ -79,7 +80,7 @@ import IconOnlineJs from "../assets/util-icons/onlineJS.svg";
 
 // import IconColorPicker from "../assets/util-icons/colorPicker.svg";
 export default {
-  components: { GraphIndicator },
+  components: { GraphIndicator, FadeLoader },
   mixins: [],
   props: {
     utilSearchText: String,
@@ -87,60 +88,8 @@ export default {
   data() {
     return {
       isLoading: false,
-      utilList: [
-        {
-          name: "Dump Tester",
-          desc: "시험문제 덤프를 만들고 풀어보세요.",
-          route: "/utils/dumpTester",
-        },
-        {
-          name: "JSON Parser",
-          desc: "String형식의 JSON을 파싱하세요.",
-          route: "/utils/jsonParser",
-        },
-        // {
-        //   name: "Color Picker",
-        //   desc: "색상을 선택하고 코드를 알아보세요.",
-        //   route: "/utils/colorPicker",
-        // },
-        {
-          name: "Convert Image",
-          desc: "이미지를 다른형식으로 변환하세요.",
-          route: "/utils/convertImage",
-        },
-        {
-          name: "Combine PDF",
-          desc: "여러 PDF파일을 합쳐보세요.",
-          route: "/utils/combinePdf",
-        },
-        // {
-        //   name: "Online JS",
-        //   desc: "JS를 온라인에서 실행해보세요.",
-        //   route: "/utils/onlineJS",
-        // },
-      ] as { name: string; desc: string; route: string }[],
+      utilList: UtilList,
       searchUtilList: [] as { name: string; desc: string; route: string }[],
-
-      graphIndicators: [
-        {
-          label: "테스트1",
-          color: "cyan",
-          total: 100,
-          used: 60,
-        },
-        {
-          label: "테스트2",
-          color: "purple",
-          total: 100,
-          used: 35,
-        },
-        {
-          label: "테스트3",
-          color: "emerald",
-          total: 100,
-          used: 80,
-        },
-      ],
 
       postList: [] as {
         title: string;
@@ -236,10 +185,34 @@ export default {
 .page-wrap {
   display: flex;
   flex-direction: column;
+  .blue-wrap {
+    width: 100%;
+    height: 300px;
+    border-radius: 14px;
+    margin-bottom: 20px;
+    background: rgb(165, 207, 255);
+    color: #fff;
+    padding: 15px;
+    position: relative;
+    overflow: hidden;
+    .dashboard-blue-title {
+      text-align: left;
+      font-size: 24px;
+      font-weight: bolder;
+      margin: 20px 0 0 20px;
+    }
+    img {
+      position: absolute;
+      right: 10px;
+      bottom: -20px;
+      width: 300px;
+      height: 300px;
+      transform: scaleX(-1);
+    }
+  }
   align-items: flex-start;
   .util-dashboard-wrap {
     width: 100%;
-    height: 350px;
     background: #fff;
     border-radius: 14px;
     display: flex;
@@ -247,14 +220,19 @@ export default {
     justify-content: space-between;
     margin-bottom: 20px;
     padding: 15px;
-
-    .graph-wrap {
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-around;
+    .post-list-header {
+      justify-content: space-between;
+      margin: 10px 0;
+      .sub-tit {
+        margin: 0;
+      }
+      .list-length {
+        font-size: 14px;
+        font-weight: normal;
+        color: #333;
+      }
     }
+
     .post-list {
       width: 100%;
       height: 170px;

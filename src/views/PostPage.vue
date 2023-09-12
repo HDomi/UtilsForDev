@@ -29,9 +29,10 @@
 import MakeToast from "@/utils/makeToast";
 import axios from "axios";
 import htmlConverter from "@/utils/htmlConverter";
+import FadeLoader from "vue-spinner/src/FadeLoader.vue";
 
 export default {
-  components: {},
+  components: { FadeLoader },
   mixins: [],
   props: {},
   data() {
