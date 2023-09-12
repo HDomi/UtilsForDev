@@ -70,15 +70,7 @@ import axios from "axios";
 import MakeToast from "@/utils/makeToast";
 import GraphIndicator from "@/components/GraphIndicator.vue";
 import FadeLoader from "vue-spinner/src/FadeLoader.vue";
-import UtilList from "@/utils/UtilList";
-//Icons
-import IconDumpTester from "../assets/util-icons/dumpTester.svg";
-import IconJsonParser from "../assets/util-icons/jsonParser.svg";
-import IconConvertImage from "../assets/util-icons/convertImage.svg";
-import IconCombinePdf from "../assets/util-icons/combinePdf.svg";
-import IconOnlineJs from "../assets/util-icons/onlineJS.svg";
-
-// import IconColorPicker from "../assets/util-icons/colorPicker.svg";
+import { UtilList, GetIcon } from "@/utils/UtilList";
 export default {
   components: { GraphIndicator, FadeLoader },
   mixins: [],
@@ -112,22 +104,7 @@ export default {
   },
   methods: {
     getIcon(name: string) {
-      switch (name) {
-        case "Dump Tester":
-          return IconDumpTester;
-        case "JSON Parser":
-          return IconJsonParser;
-        case "Convert Image":
-          return IconConvertImage;
-        case "Combine PDF":
-          return IconCombinePdf;
-        case "Online JS":
-          return IconOnlineJs;
-        // case "Color Picker":
-        //   return IconColorPicker;
-        default:
-          return "";
-      }
+      return GetIcon(name);
     },
     getFilteredUtilList(searchValue: any) {
       if (
@@ -174,7 +151,7 @@ export default {
       this.$router.push({
         path: `/posting`,
         query: {
-          mdPath: `${path}`,
+          mdPath: path,
         },
       });
     },
@@ -219,10 +196,10 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     margin-bottom: 20px;
-    padding: 15px;
+    padding: 0 15px 15px 15px;
     .post-list-header {
       justify-content: space-between;
-      margin: 10px 0;
+      margin: 15px 0;
       .sub-tit {
         margin: 0;
       }

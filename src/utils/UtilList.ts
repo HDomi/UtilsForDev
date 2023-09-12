@@ -1,4 +1,11 @@
-const UtilList = [
+//Icons
+import IconDumpTester from "@/assets/util-icons/dumpTester.svg";
+import IconJsonParser from "@/assets/util-icons/jsonParser.svg";
+import IconConvertImage from "@/assets/util-icons/convertImage.svg";
+import IconCombinePdf from "@/assets/util-icons/combinePdf.svg";
+import IconOnlineJs from "@/assets/util-icons/onlineJS.svg";
+
+export const UtilList = [
   {
     name: "Dump Tester",
     desc: "시험문제 덤프를 만들고 풀어보세요.",
@@ -30,4 +37,22 @@ const UtilList = [
   //   route: "/utils/onlineJS",
   // },
 ];
-export default UtilList;
+
+export const GetIcon = (name: string) => {
+  switch (name) {
+    case "Dump Tester":
+      return IconDumpTester;
+    case "JSON Parser":
+      return IconJsonParser;
+    case "Convert Image":
+      return IconConvertImage;
+    case "Combine PDF":
+      return IconCombinePdf;
+    case "Online JS":
+      return IconOnlineJs;
+    // case "Color Picker":
+    //   return IconColorPicker;
+    default:
+      return "";
+  }
+};

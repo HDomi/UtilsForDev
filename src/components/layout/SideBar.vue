@@ -16,7 +16,7 @@
           <div>{{ item.name }}</div>
         </div>
       </router-link>
-      <router-link to="/about">
+      <router-link to="/about" style="margin-top: 20px">
         <div class="item-title">About</div>
       </router-link>
     </div>
@@ -24,13 +24,7 @@
 </template>
 
 <script lang="ts">
-import UtilList from "@/utils/UtilList";
-//Icons
-import IconDumpTester from "../../assets/util-icons/dumpTester.svg";
-import IconJsonParser from "../../assets/util-icons/jsonParser.svg";
-import IconConvertImage from "../../assets/util-icons/convertImage.svg";
-import IconCombinePdf from "../../assets/util-icons/combinePdf.svg";
-import IconOnlineJs from "../../assets/util-icons/onlineJS.svg";
+import { UtilList, GetIcon } from "@/utils/UtilList";
 export default {
   components: {},
   mixins: [],
@@ -48,22 +42,7 @@ export default {
   mounted() {},
   methods: {
     getIcon(name: string) {
-      switch (name) {
-        case "Dump Tester":
-          return IconDumpTester;
-        case "JSON Parser":
-          return IconJsonParser;
-        case "Convert Image":
-          return IconConvertImage;
-        case "Combine PDF":
-          return IconCombinePdf;
-        case "Online JS":
-          return IconOnlineJs;
-        // case "Color Picker":
-        //   return IconColorPicker;
-        default:
-          return "";
-      }
+      return GetIcon(name);
     },
   },
 };
