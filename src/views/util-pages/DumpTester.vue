@@ -39,12 +39,12 @@
         <div v-for="(dump, index) in savedDumps" :key="index" class="dump-item">
           {{ dump.title }}
           <img
-            src="../../assets/ic_download.svg"
+            src="../../assets/dump-tester/ic_download.svg"
             class="delete-saved"
             @click="onClickSavedDumps(index)"
           />
           <img
-            src="../../assets/ic_del.svg"
+            src="../../assets/dump-tester/ic_del.svg"
             class="delete-saved"
             @click="deleteDump(index)"
           />
@@ -498,21 +498,14 @@ export default {
   padding: 8px 12px;
   min-height: 25px;
   line-height: 25px;
-  background-color: rgba(255, 255, 255, 0.9);
-  color: #000;
-  border: 1px solid #333;
+  background-color: #007bff;
+  color: #fff;
   border-radius: 20px;
   transition: background-color 0.3s ease-out 0s;
 }
 .filebox label:hover {
-  background: linear-gradient(
-    92.88deg,
-    #455eb5 9.16%,
-    #5643cc 43.89%,
-    #673fd7 64.72%
-  );
+  background-color: #52a6ff;
   color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0);
 }
 .filebox input[type="file"] {
   /* 파일 필드 숨기기 */
@@ -549,38 +542,30 @@ button {
   cursor: pointer;
   min-height: 25px;
   line-height: 23px;
-  background-color: rgba(255, 255, 255, 0.9);
-  color: #000;
+  background-color: #007bff;
+  color: #fff;
   font-weight: 700;
-  border: 1px solid #333;
   border-radius: 20px;
+  border: none;
   transition: background-color 0.3s ease-out 0s;
 }
 button:hover {
-  background: linear-gradient(
-    92.88deg,
-    #455eb5 9.16%,
-    #5643cc 43.89%,
-    #673fd7 64.72%
-  );
+  background-color: #52a6ff;
   color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0);
 }
 button:disabled,
 button[disabled] {
   pointer-events: none;
-  border: 1px solid #333;
   color: #333;
-  background-color: rgba(255, 255, 255, 0);
+  background-color: #fff;
 }
 .dump-item {
   min-width: max-content;
   padding: 5px 10px;
   height: 100%;
-  background: #fff;
+  background-color: #007bff;
   border-radius: 10px;
-  color: #000;
-  border: 1px solid #000;
+  color: #fff;
   font-weight: 500;
   margin-right: 10px;
   display: flex;
@@ -590,12 +575,7 @@ button[disabled] {
   transition: background-color 0.3s ease-out 0s;
 }
 .dump-item:hover {
-  background: linear-gradient(
-    92.88deg,
-    #455eb5 9.16%,
-    #5643cc 43.89%,
-    #673fd7 64.72%
-  );
+  background-color: #52a6ff;
   color: #fff;
 }
 .delete-saved {
@@ -608,6 +588,7 @@ button[disabled] {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 15px;
 }
 .example {
   display: flex;

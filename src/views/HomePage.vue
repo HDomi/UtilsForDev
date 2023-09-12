@@ -1,5 +1,34 @@
 <template>
   <div class="page-wrap overHidden">
+    <p class="main-tit">Dashboard</p>
+    <div class="util-dashboard-wrap shadowBox">
+      <div class="graph-wrap">
+        <GraphIndicator
+          v-for="(item, idx) in graphIndicators"
+          :key="`item-${idx}`"
+          :gColor="item.color"
+          :gTotal="item.total"
+          :gUsed="item.used"
+          :gLabel="item.label"
+        ></GraphIndicator>
+      </div>
+      <div class="post-list blueScrollBar">
+        <div
+          v-for="(item, idx) in postList"
+          :key="`item-${idx}`"
+          class="post-item"
+        >
+          <div class="post-title">
+            {{ item.title }}
+          </div>
+          <div class="post-info flexRow">
+            <div class="post-writer">{{ item.writer }}</div>
+            <div class="post-date">{{ item.date }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="main-tit">Utils</p>
     <div v-if="searchUtilList.length" class="util-list-wrap">
       <div
         class="util-list-item-wrap"
@@ -8,7 +37,7 @@
       >
         <router-link
           :to="item.route"
-          class="util-item"
+          class="util-item shadowBox"
           @click="onClickUtil(item.name)"
         >
           <img :src="getIcon(item.name)" />
@@ -32,6 +61,7 @@
 <script lang="ts">
 import _ from "lodash";
 import MakeToast from "@/utils/makeToast";
+import GraphIndicator from "@/components/GraphIndicator.vue";
 //Icons
 import IconDumpTester from "../assets/util-icons/dumpTester.svg";
 import IconJsonParser from "../assets/util-icons/jsonParser.svg";
@@ -41,7 +71,7 @@ import IconOnlineJs from "../assets/util-icons/onlineJS.svg";
 
 // import IconColorPicker from "../assets/util-icons/colorPicker.svg";
 export default {
-  components: {},
+  components: { GraphIndicator },
   mixins: [],
   props: {
     utilSearchText: String,
@@ -81,6 +111,55 @@ export default {
         // },
       ] as { name: string; desc: string; route: string }[],
       searchUtilList: [] as { name: string; desc: string; route: string }[],
+
+      graphIndicators: [
+        {
+          label: "테스트1",
+          color: "cyan",
+          total: 100,
+          used: 60,
+        },
+        {
+          label: "테스트2",
+          color: "purple",
+          total: 100,
+          used: 35,
+        },
+        {
+          label: "테스트3",
+          color: "emerald",
+          total: 100,
+          used: 80,
+        },
+      ],
+
+      postList: [
+        {
+          title: "제목1",
+          writer: "ADMIN",
+          date: "2023.09.12",
+        },
+        {
+          title: "제목2",
+          writer: "ADMIN",
+          date: "2023.09.12",
+        },
+        {
+          title: "제목3",
+          writer: "ADMIN",
+          date: "2023.09.12",
+        },
+        {
+          title: "제목4",
+          writer: "ADMIN",
+          date: "2023.09.12",
+        },
+        {
+          title: "제목5",
+          writer: "ADMIN",
+          date: "2023.09.12",
+        },
+      ],
     };
   },
   computed: {},
@@ -126,54 +205,110 @@ export default {
       );
     },
     onClickUtil(name: any) {
-      MakeToast(`${name}으로 이동했습니다.`, "success", 2000);
+      // MakeToast(`${name}으로 이동했습니다.`, "success", 2000);
     },
   },
 };
 </script>
 <style scoped lang="scss">
-.util-list-wrap {
-  width: 100%;
-  gap: 15px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
-  .no-list {
-    font-size: 16px;
-    font-weight: bold;
-  }
-  .util-list-item-wrap {
+.page-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  .util-dashboard-wrap {
     width: 100%;
-    height: 100%;
+    height: 350px;
+    background: #fff;
+    border-radius: 14px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    .util-item {
-      background: #fff;
-      padding: 10px;
-      width: 170px;
-      height: 170px;
-      border-radius: 15px;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 15px;
+
+    .graph-wrap {
+      width: 100%;
       display: flex;
-      flex-direction: column;
-      justify-content: space-around;
+      flex-direction: row;
       align-items: center;
-      box-shadow: 7px 7px 30px rgba(0, 0, 0, 0.1);
+      justify-content: space-around;
+    }
+    .post-list {
+      width: 100%;
+      height: 170px;
+      background: #f7f6fb;
+      border-radius: 14px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      box-shadow: inset 0px 0px 16px 1px rgba(0, 0, 0, 0.1);
       backdrop-filter: blur(5px);
       transition: box-shadow 0.1s;
-      &:hover {
-        outline: 1px solid rgba(9, 119, 234, 0.5); /* outline 효과 추가 (투명한 가상의 테두리) */
-      }
-      img {
-        width: 70px;
-        height: 70px;
-      }
-      .item-name {
+      .post-item {
+        cursor: pointer;
+        width: 100%;
+        padding: 10px 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         font-size: 16px;
-        font-weight: bold;
+        border-bottom: 2px solid #fff;
+        color: #333;
+        &:hover {
+          background: #edeaf8;
+        }
+        .post-title {
+          font-weight: bold;
+        }
+        .post-info {
+          font-size: 14px;
+          font-weight: normal;
+          .post-date {
+            margin-left: 20px;
+          }
+        }
       }
-      .item-desc {
-        font-size: 12px;
-        margin-top: 2px;
+    }
+  }
+  .util-list-wrap {
+    width: 100%;
+    gap: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+    .no-list {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .util-list-item-wrap {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .util-item {
+        background: #fff;
+        padding: 10px;
+        width: 170px;
+        height: 170px;
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        &:hover {
+          outline: 1px solid rgba(9, 119, 234, 0.5); /* outline 효과 추가 (투명한 가상의 테두리) */
+        }
+        img {
+          width: 70px;
+          height: 70px;
+        }
+        .item-name {
+          font-size: 16px;
+          font-weight: bold;
+        }
+        .item-desc {
+          font-size: 12px;
+          margin-top: 2px;
+        }
       }
     }
   }

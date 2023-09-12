@@ -1,6 +1,6 @@
 <template>
   <div class="page-wrap">
-    <div class="pdf-header">
+    <div class="pdf-header shadowBox">
       <div class="file-input-wrapper">
         <input
           type="file"

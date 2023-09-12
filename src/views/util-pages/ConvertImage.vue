@@ -1,6 +1,6 @@
 <template>
   <div class="page-wrap">
-    <div class="image-sec">
+    <div class="image-sec shadowBox">
       <div class="upload-img" v-if="uploadedImage">
         <img :src="uploadedSrc" alt="Uploaded Image" />
         <img
@@ -199,7 +199,7 @@ export default {
     position: relative;
     background: #fff;
     width: 100%;
-    height: 500px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;

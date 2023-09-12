@@ -104,6 +104,29 @@ textarea {
   color: #333;
   font-weight: normal;
 }
+.main-tit {
+  color: #333;
+  font-size: 20px;
+  font-weight: bolder;
+  margin-bottom: 10px;
+  display: inline-block;
+  margin: 0 0 15px 0;
+  padding: 0;
+}
+.sub-tit {
+  color: #6c6c6c;
+  font-size: 14px;
+  font-weight: bolder;
+  margin-bottom: 10px;
+  display: inline-block;
+  margin: 0 0 15px 0;
+  padding: 0;
+}
+.shadowBox {
+  box-shadow: 7px 7px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  transition: box-shadow 0.1s;
+}
 .blue-btn {
   border-radius: 14px;
   background-color: #007bff;
