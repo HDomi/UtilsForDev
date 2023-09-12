@@ -1,6 +1,6 @@
 <template>
   <div class="footer-wrap">
-    <div class="footer-title">Utils-for-Developer</div>
+    <div class="footer-title">Utils For Developer</div>
     <div class="footer-title">Copyrightⓒ2023.Domi.All rights reserved.</div>
   </div>
 </template>

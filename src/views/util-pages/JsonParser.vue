@@ -94,7 +94,6 @@ export default {
 
           return parsed;
         } catch (error) {
-          console.error("JSON parsing error:", error);
           return `<span>유효하지 않은 데이터입니다.</span>`;
         }
       } else {

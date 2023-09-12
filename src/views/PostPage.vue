@@ -1,10 +1,5 @@
 <template>
   <div class="page-wrap">
-    <div v-if="isLoading" class="loading-container">
-      <div class="loading">
-        <FadeLoader />
-      </div>
-    </div>
     <div class="page-wrap-inner">
       <div class="posting-title">
         <h1>{{ mdTitle }}</h1>
@@ -29,34 +24,33 @@
 import MakeToast from "@/utils/makeToast";
 import axios from "axios";
 import htmlConverter from "@/utils/htmlConverter";
-import FadeLoader from "vue-spinner/src/FadeLoader.vue";
 
 export default {
-  components: { FadeLoader },
+  components: {},
   mixins: [],
   props: {},
   data() {
     return {
-      isLoading: false,
       mdTitle: "",
       mdWriter: "",
       contents: "",
     };
   },
   async created() {
-    this.isLoading = true;
+    this.loadingHandler(true);
     const path = this.$route.query.mdPath;
     await axios
       .get(`https://hdomi.github.io/util-posts/${path}`)
       .then((res: any) => {
         this.contents = htmlConverter(res.data);
-        this.isLoading = false;
+        this.loadingHandler(false);
       })
       .catch((e: any) => {
         console.log(`ERROR🙄 ${e.response.status} : ${e.request.responseURL}`);
-        this.isLoading = false;
+        this.loadingHandler(false);
       });
   },
+
   computed: {},
   presets: {},
   watch: {},
@@ -71,6 +65,9 @@ export default {
       this.$router.push({
         path: `/utils`,
       });
+    },
+    loadingHandler(value: boolean) {
+      this.$emit("loadingHandler", value);
     },
   },
 };

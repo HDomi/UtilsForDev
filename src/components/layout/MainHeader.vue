@@ -63,11 +63,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@font-face {
-  font-family: neon;
-  src: url(../../assets/fonts/neon.ttf);
-}
-
 .header-wrap {
   width: 100%;
   z-index: 997;
@@ -80,6 +75,7 @@ export default {
   .header-title {
     display: flex;
     align-items: center;
+    cursor: pointer;
     img {
       width: 35px;
       margin-right: 10px;

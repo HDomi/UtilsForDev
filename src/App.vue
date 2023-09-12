@@ -1,9 +1,17 @@
 <template>
   <div class="App-wrap" ref="main">
+    <div v-if="isLoading" class="loading-container">
+      <div class="loading">
+        <FadeLoader />
+      </div>
+    </div>
     <SideBar />
     <div class="sec-wrap blueScrollBar">
       <MainHeader @searchUtil="searchUtil" />
-      <router-view :utilSearchText="utilSearchText" />
+      <router-view
+        :utilSearchText="utilSearchText"
+        @loadingHandler="loadingHandler"
+      />
       <Footer />
     </div>
   </div>
@@ -12,17 +20,20 @@
 import MainHeader from "@/components/layout/MainHeader.vue";
 import SideBar from "@/components/layout/SideBar.vue";
 import Footer from "@/components/layout/Footer.vue";
+import FadeLoader from "vue-spinner/src/FadeLoader.vue";
 export default {
   components: {
     MainHeader,
     Footer,
     SideBar,
+    FadeLoader,
   },
   mixins: [],
   props: {},
   data() {
     return {
       utilSearchText: "",
+      isLoading: false,
     };
   },
   computed: {},
@@ -32,6 +43,9 @@ export default {
   methods: {
     searchUtil(text: string) {
       this.utilSearchText = text;
+    },
+    loadingHandler(state: boolean) {
+      this.isLoading = state;
     },
   },
 };

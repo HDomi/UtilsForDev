@@ -113,34 +113,43 @@ export default {
       console.log("Future index: " + e.draggedContext.futureIndex);
     },
     async mergeAndDownload() {
-      const mergedPdfDoc = await PDFDocument.create();
+      try {
+        const mergedPdfDoc = await PDFDocument.create();
 
-      for (const pdfFile of this.pdfFiles) {
-        const pdfBuffer = await pdfFile.arrayBuffer();
-        const pdfDoc = await PDFDocument.load(pdfBuffer);
+        for (const pdfFile of this.pdfFiles) {
+          const pdfBuffer = await pdfFile.arrayBuffer();
+          const pdfDoc = await PDFDocument.load(pdfBuffer);
 
-        const copiedPages = await mergedPdfDoc.copyPages(
-          pdfDoc,
-          pdfDoc.getPageIndices()
-        );
-        copiedPages.forEach((copiedPage) => {
-          mergedPdfDoc.addPage(copiedPage);
+          const copiedPages = await mergedPdfDoc.copyPages(
+            pdfDoc,
+            pdfDoc.getPageIndices()
+          );
+          copiedPages.forEach((copiedPage) => {
+            mergedPdfDoc.addPage(copiedPage);
+          });
+        }
+
+        const mergedPdfBytes = await mergedPdfDoc.save();
+
+        const mergedPdfBlob = new Blob([mergedPdfBytes], {
+          type: "application/pdf",
         });
+        const mergedPdfUrl = URL.createObjectURL(mergedPdfBlob);
+
+        const downloadLink = document.createElement("a");
+        downloadLink.href = mergedPdfUrl;
+        downloadLink.download = "Combined.pdf";
+        downloadLink.click();
+
+        URL.revokeObjectURL(mergedPdfUrl);
+      } catch (err: any) {
+        const errString = `${err}`;
+        if (errString.includes("ignoreEncryption: true")) {
+          MakeToast(`보안설정이 되어있는 PDF가 있습니다.`, "error", 2000);
+        } else {
+          MakeToast(`${err}`, "error", 2000);
+        }
       }
-
-      const mergedPdfBytes = await mergedPdfDoc.save();
-
-      const mergedPdfBlob = new Blob([mergedPdfBytes], {
-        type: "application/pdf",
-      });
-      const mergedPdfUrl = URL.createObjectURL(mergedPdfBlob);
-
-      const downloadLink = document.createElement("a");
-      downloadLink.href = mergedPdfUrl;
-      downloadLink.download = "Combined.pdf";
-      downloadLink.click();
-
-      URL.revokeObjectURL(mergedPdfUrl);
     },
   },
 };

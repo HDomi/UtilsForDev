@@ -1,10 +1,5 @@
 <template>
   <div class="page-wrap overHidden">
-    <div v-if="isLoading" class="loading-container">
-      <div class="loading">
-        <FadeLoader />
-      </div>
-    </div>
     <p class="main-tit">Dashboard</p>
     <div class="blue-wrap shadowBox">
       <p class="dashboard-blue-title">
@@ -69,17 +64,15 @@ import _ from "lodash";
 import axios from "axios";
 import MakeToast from "@/utils/makeToast";
 import GraphIndicator from "@/components/GraphIndicator.vue";
-import FadeLoader from "vue-spinner/src/FadeLoader.vue";
 import { UtilList, GetIcon } from "@/utils/UtilList";
 export default {
-  components: { GraphIndicator, FadeLoader },
+  components: { GraphIndicator },
   mixins: [],
   props: {
     utilSearchText: String,
   },
   data() {
     return {
-      isLoading: false,
       utilList: UtilList,
       searchUtilList: [] as { name: string; desc: string; route: string }[],
 
@@ -123,7 +116,7 @@ export default {
       // MakeToast(`${name}으로 이동했습니다.`, "success", 2000);
     },
     async getPosts() {
-      this.isLoading = true;
+      this.loadingHandler(true);
       let posts = await axios
         .get(`https://api.github.com/repos/hdomi/util-posts/contents/`)
         .then((res: any) => {
@@ -145,7 +138,7 @@ export default {
           return convertList;
         });
       this.postList = posts;
-      this.isLoading = false;
+      this.loadingHandler(false);
     },
     onClickPost(path: string) {
       this.$router.push({
@@ -154,6 +147,9 @@ export default {
           mdPath: path,
         },
       });
+    },
+    loadingHandler(value: boolean) {
+      this.$emit("loadingHandler", value);
     },
   },
 };
