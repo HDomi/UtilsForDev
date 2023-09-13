@@ -161,6 +161,7 @@ export default {
   .blue-wrap {
     width: 100%;
     height: 300px;
+    min-height: 300px;
     border-radius: 14px;
     margin-bottom: 20px;
     background: rgb(165, 207, 255);
