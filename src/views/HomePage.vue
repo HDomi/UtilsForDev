@@ -1,5 +1,5 @@
 <template>
-  <div class="page-wrap overHidden">
+  <div class="page-wrap">
     <p class="main-tit">Dashboard</p>
     <div class="blue-wrap shadowBox">
       <p class="dashboard-blue-title">

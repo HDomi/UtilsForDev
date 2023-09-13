@@ -75,6 +75,7 @@ export default {
 
 <style scoped lang="scss">
 .page-wrap {
+  height: 100%;
   min-height: min-content !important;
 }
 .cutBar {

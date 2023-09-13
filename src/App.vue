@@ -187,7 +187,7 @@ textarea {
   position: relative;
 }
 .page-wrap {
-  height: 100%;
+  height: max-content;
   width: 100%;
   padding: 30px 40px 30px 40px;
   text-align: center;
