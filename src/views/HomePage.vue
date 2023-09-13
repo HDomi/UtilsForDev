@@ -287,4 +287,15 @@ export default {
     }
   }
 }
+@media (max-width: 480px) {
+  .util-list-wrap {
+    display: flex !important;
+    flex-direction: column !important;
+    .util-list-item-wrap {
+      .util-item {
+        width: 100% !important;
+      }
+    }
+  }
+}
 </style>

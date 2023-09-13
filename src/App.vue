@@ -6,7 +6,7 @@
       </div>
     </div>
     <SideBar />
-    <div class="sec-wrap blueScrollBar">
+    <div class="sec-wrap">
       <MainHeader @searchUtil="searchUtil" />
       <router-view
         :utilSearchText="utilSearchText"
@@ -187,13 +187,26 @@ textarea {
   position: relative;
 }
 .page-wrap {
-  height: max-content;
+  height: 100%;
   width: 100%;
   padding: 30px 40px 30px 40px;
   text-align: center;
   align-items: center;
   display: flex;
   flex-direction: column;
+  min-height: max-content;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    height: 30%;
+    background: rgb(107, 176, 255);
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background: rgb(234, 249, 255);
+  }
 }
 .page-tit-wrap {
   display: flex;
@@ -241,11 +254,11 @@ textarea {
   flex-direction: row;
 }
 .sec-wrap {
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
   position: relative;
   width: 100%;
   height: 100%;
+  min-height: max-content;
   display: flex;
   flex-direction: column;
 }

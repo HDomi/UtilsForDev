@@ -119,4 +119,9 @@ export default {
     }
   }
 }
+@media (max-width: 970px) {
+  .sidebar-wrap {
+    display: none;
+  }
+}
 </style>

@@ -2,7 +2,8 @@
   <div class="header-wrap">
     <router-link to="/utils">
       <div class="header-title">
-        <img src="../../assets/domi_logo_color.svg" />{{ headerTitle }}
+        <img src="../../assets/domi_logo_color.svg" />
+        <div>{{ headerTitle }}</div>
       </div>
     </router-link>
     <div class="search-bar" v-if="isHome">
@@ -103,6 +104,11 @@ export default {
     }
   }
 }
-@media (max-width: 470px) {
+@media (max-width: 540px) {
+  .header-title {
+    div {
+      display: none !important;
+    }
+  }
 }
 </style>

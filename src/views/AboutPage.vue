@@ -32,6 +32,8 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  height: 100%;
+  min-height: min-content !important;
   .about-box {
     width: 100%;
     height: 100%;
